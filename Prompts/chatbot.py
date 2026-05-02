@@ -43,6 +43,7 @@ while True:
     if user_input == "end":
         break
     result = model.invoke(Chat_History)
+    # here we sent the whole chat history into the model
     Chat_History.append(result)
     print("AI: ",result.content)
 
