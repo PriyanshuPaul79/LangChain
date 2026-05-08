@@ -57,7 +57,7 @@ prompt = ChatPromptTemplate.from_messages([
         "summary, sentiment (pos/neg), author, reviewScore, pros (array), cons (array). "
         "Do not add any extra fields."
     )),
-    ("human", "{review}")
+    ("human", "{review}") 
 ])
 
 chain = prompt | structure
