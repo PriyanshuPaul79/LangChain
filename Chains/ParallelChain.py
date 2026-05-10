@@ -1,13 +1,16 @@
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableBranch, RunnableParallel
+from langchain_core.output_parsers import StrOutputParser
 from pydantic import BaseModel, Field
-from langchain_core.runnables import RunnableParallel
+from langchain_ollama import ChatOllama
+
 
 load_dotenv()
-
-model = ChatGroq(model_name = "llama-3.1-8b-instant")   
-model2  = ChatGroq(model_name = "openai/gpt-oss-120b")
+# model = ChatGroq(model_name = "llama-3.1-8b-instant")
+# model2  = ChatGroq(model_name = "openai/gpt-oss-120b")
+model  = ChatOllama(model="qwen2.5:7b")
 
 class Market(BaseModel):
     sentiment: str = Field(description="either bullish or bearish")
@@ -15,7 +18,7 @@ class Market(BaseModel):
     score : int = Field(description = "score out of 10")
 
 structured_model = model.with_structured_output(Market)
-structured_model2 = model2.with_structured_output(Market)
+structured_model2 = model.with_structured_output(Market)
 
 prompt = PromptTemplate(
     template = """
