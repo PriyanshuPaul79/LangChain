@@ -3,7 +3,7 @@ from pydantic import BaseModel,Field
 from typing import List,Optional
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-
+   
 load_dotenv()
 
 model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
